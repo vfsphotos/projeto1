@@ -1,23 +1,35 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Comprar semanais</title>
-</head>
-<body>
-    <h1>Lista de tarefas</h1>
-    <p><button>Voltar</button></p>
-    <input type="text" placeholder="Novo item" class="entrada">
-    <button type="submit">Adicionar</button>
+  </head>
+  <body>
+    <h1>{{ name }}</h1>
+    <a href="{% url 'index' %}"><button type="submit">Voltar</button></a
+    ><br /><br />
+
+    <form method="post" action="{% url 'store-item' todo_id %}">
+      {% csrf_token %}
+      <input type="text" name="text" placeholder="Novo item" required />
+      <button type="submit">Adicionar</button>
+    </form>
+
     <ul>
-        {% for item in items %}
-        <li>
-            {{ item.text }}
-            <button type="button">Concluida</button>
-            <button type="submit">Excluir</button>
-        </li>
-        {% endfor %}
+      {% for item in items %}
+      <li>
+        {{ item.text }}
+        <button type="button">Concluida</button>
+        <form
+          method="post"
+          action="{% url 'destroy-item' item.todo.id item.id %}"
+        >
+          {% csrf_token %}
+          <button type="submit">Excluir</button>
+        </form>
+      </li>
+      {% endfor %}
     </ul>
-</body>
+  </body>
 </html>
