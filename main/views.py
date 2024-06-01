@@ -1,4 +1,4 @@
-from main.models import Todo
+from main.models import Todo, Item
 from django.shortcuts import render, redirect
 
 def index(request):
@@ -32,3 +32,10 @@ def destroy_item(request, todo_id, item_id):
         todo = Todo.objects.get(id=todo_id)
         todo.items.filter(id=item_id).delete()
         return redirect('show', id=todo_id)
+    
+def put(request, item_id):
+    if request.method == 'POST':
+        item = Item.objects.get(id=item_id)
+        item.complete = not item.complete
+        item.save()
+        return redirect('show', id=item.todo.id)
