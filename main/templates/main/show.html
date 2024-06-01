@@ -20,11 +20,14 @@
       {% for item in items %}
       <li>
         {{ item.text }}
-        <button type="button">Concluida</button>
-        <form
-          method="post"
-          action="{% url 'destroy-item' item.todo.id item.id %}"
-        >
+        <form action="{% url 'put-item' item.id %}" method="post" style="display: inline;">
+          {% csrf_token %} {% if item.complete %}
+          <button type="submit">Concluida</button>
+          {% else %}
+          <button type="submit">Pendente</button>
+          {% endif %}
+        </form>
+        <form method="post" action="{% url 'destroy-item' item.todo.id item.id %}" style="display: inline;">
           {% csrf_token %}
           <button type="submit">Excluir</button>
         </form>

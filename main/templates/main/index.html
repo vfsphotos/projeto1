@@ -8,7 +8,7 @@
 <body>
     <h1>Lista de tarefas</h1>
 
-    <form method="post" action="{% url 'store' %}">
+    <form method="post" action="{% url 'store' %}" style="display: inline;">
         {% csrf_token %}
         <input type="text" name="todo_name" placeholder="Nova tarefa" required>
         <button type="submit">Adicionar</button>
@@ -19,7 +19,7 @@
         <li>
             {{ todo.name }}
             <a href="{% url 'show' todo.id %}"><button type="button">Abrir</button></a>
-                <form method="post" action="{% url 'destroy' todo.id %}">
+                <form method="post" action="{% url 'destroy' todo.id %}" style="display: inline;">
                     {% csrf_token %}
                     <button type="submit">Excluir</button>
                 </form>
