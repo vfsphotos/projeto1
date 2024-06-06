@@ -4,10 +4,8 @@
 Lista de tarefas
 {% endblock %}
 
+{% block title_h1 %}Lista de tarefas{% endblock %}
 {% block content %}
-<div class="container-fluid">
-    <h1>Lista de tarefas</h1>
-
     <form method="post" action="{% url 'store' %}" style="display: inline;">
         {% csrf_token %}
         <input type="text" name="todo_name" placeholder="Nova tarefa" required>
@@ -26,5 +24,4 @@ Lista de tarefas
         </li>
         {% endfor %}
     </ul>
-</div>
 {% endblock %}

@@ -1,5 +1,11 @@
-  <div class="container-fluid">  
-    <h1>{{ name }}</h1>
+{% extends './base.html' %}
+
+{% block title %}
+Detalhes da tarefa
+{% endblock %}
+
+{% block title_h1 %} {{name}} {% endblock %}
+{% block content %}
     <a href="{% url 'index' %}"><button type="submit">Voltar</button></a
     ><br /><br />
 
@@ -27,4 +33,4 @@
       </li>
       {% endfor %}
     </ul>
-  </div>
+{% endblock %}
